@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../../components/Layout/Layout';
-import Grid from '../../components/Grid/Grid';
+import Layout from '../../components/Layout';
+import Grid from '../../components/Grid';
 
 const Home = () => {
     return (

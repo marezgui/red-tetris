@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Square from '../Square/Square';
+import Square from '../Square';
 import { makeStyles } from '@material-ui/core/styles';
 
 const ROWS = 20;

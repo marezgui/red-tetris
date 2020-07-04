@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
