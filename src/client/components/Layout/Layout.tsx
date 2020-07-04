@@ -1,6 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../NavBar/NavBar';
 import { Container } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        marginTop: '24px'
+    }
+  }));
 
 type LayoutProps = {
     children?: any
@@ -8,11 +15,12 @@ type LayoutProps = {
 
 const Layout: FunctionComponent<LayoutProps>= (props) => {
     const { children } = props;
+    const classes = useStyles();
 
     return (
         <>
             <NavBar />
-            <Container >
+            <Container className={classes.container}>
                 {children}
             </Container>
         </>
