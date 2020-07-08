@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Square from '../Square';
 import { makeStyles } from '@material-ui/core/styles';
 
-const ROWS = 20;
-const COLS = 10;
+type Props = {
+    gridArray?: any[][]
+};
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -15,21 +16,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Grid = () => {
-    const [gridArray, setGridArray] = useState(new Array(ROWS).fill(null).map(item =>(new Array(COLS).fill(null))));
+const Grid = (props: Props) => {
+    const { gridArray } = props;
     const classes = useStyles();
-
-    console.log(gridArray);
 
     return (
         <div
             className={classes.grid}
         >
-            {gridArray.map((value, i) => {
+            {gridArray?.map((value, i) => {
                 return (
                     <div key={i} style={{ display: 'flex' }}>
                         {gridArray[i].map((value, j) => {
-                            return <Square key={`${i}${j}`} />
+                            return <Square key={`${i}${j}`} value={!!value}/>
                         })}
                     </div>
                 );
