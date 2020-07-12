@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '../Grid';
-import { includePiece, moveDown } from '../../libft';
-
-const START = [0, 3];
-const ROWS = 20; // X
-const COLS = 10; // Y
-const I = [[1, 0], [1, 1], [1, 2], [1, 3]]; // [Y][X]
+import { includePiece, getStartPosition, moveDown, getRandomTetrimino } from '../../global/libft';
+import { ROWS, COLS } from '../../global/constant';
 
 const Room = () => {
-    const [gridArray, setGridArray] = useState(new Array(ROWS).fill(null).map(item =>(new Array(COLS).fill(null))));
+    const [gridArray, setGridArray] = useState(
+        new Array(ROWS).fill(null).map(item =>(new Array(COLS).fill(null)))
+        );
+    const [currentPos, setCurrentPos] = useState<number[][]>([]);
+
+    const updateGridArray = (coordinates: any) => {
+        let updatedGrid = includePiece(gridArray, coordinates);
+
+        setGridArray(updatedGrid);
+        setCurrentPos(coordinates);
+    };
 
     useEffect(() => {
-        let piece = I;
-        let updatedGrid = includePiece(gridArray, piece, START);
+        let coordinates = getRandomTetrimino();
 
-        setGridArray(updatedGrid)
+        updateGridArray(coordinates);
     }, []);
 
-    setInterval(() => {
-    }, 1000);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            let newPos = moveDown(currentPos);
+
+            setCurrentPos(newPos);
+            // updateGridArray(newPos);
+        }, 1000);
+        
+        return function cleanUp() { 
+            clearInterval(timer) 
+        };
+    }, [currentPos]);
 
     return (
         <div>
